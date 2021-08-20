@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: prosody
+  name: prosody
+  namespace: jitsi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      k8s-app: prosody
+  template:
+    metadata:
+      labels:
+        k8s-app: prosody
+    spec:
+      containers:
+        - name: prosody
+          image: jitsi/prosody:stable-5870
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 5222
+          - containerPort: 5280
+          - containerPort: 5347
+          - containerPort: 5269
+          env:
+            - name: ENABLE_XMPP_WEBSOCKET # added
+              value: "0"
+            - name: XMPP_DOMAIN
+              value: meet.jitsi   
+            - name: LOG_LEVEL
+              value: debug              
+            - name: XMPP_AUTH_DOMAIN
+              value: auth.meet.jitsi
+            - name: XMPP_MUC_DOMAIN
+              value: muc.meet.jitsi
+            #- name: XMPP_MUC_MODULES
+            #  value: muc_meeting_id,muc_domain_mapper
+            - name: XMPP_INTERNAL_MUC_DOMAIN
+              value: internal-muc.meet.jitsi
+            - name: JICOFO_COMPONENT_SECRET
+              value: 9ea69e051020adb6524bbec8d88e670f
+            - name: JVB_AUTH_USER
+              value: jvb
+            - name: JVB_AUTH_PASSWORD
+              value: 6ba13a7ae9fa26809a3705273d568c5e
+            - name: JICOFO_AUTH_USER
+              value: focus
+            - name: JICOFO_AUTH_PASSWORD
+              value: cb7a95bf9671bff5afffd931e566e2dd
+            - name: TZ
+              value: America/Los_Angeles
+            - name: JVB_TCP_HARVESTER_DISABLED
+              value: "true"

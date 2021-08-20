@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: jvb
+  name: jvb
+  namespace: jitsi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      k8s-app: jvb
+  template:
+    metadata:
+      labels:
+        k8s-app: jvb
+    spec:
+      containers:
+        - name: jvb
+          ports:
+          - containerPort: 30300
+            protocol: UDP
+          - containerPort: 4443        
+          image: jitsi/jvb:stable-5870
+          resources: {}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: XMPP_SERVER
+              value: prosody
+            - name: DOCKER_HOST_ADDRESS
+              value: 10.251.11.137
+            - name: XMPP_DOMAIN
+              value: meet.jitsi
+            - name: XMPP_AUTH_DOMAIN
+              value: auth.meet.jitsi
+            - name: XMPP_INTERNAL_MUC_DOMAIN
+              value: internal-muc.meet.jitsi
+            - name: JVB_STUN_SERVERS
+              value: stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+            - name: JICOFO_AUTH_USER
+              value: focus
+            - name: JVB_TCP_HARVESTER_DISABLED
+              value: "true"
+            - name: JVB_AUTH_USER
+              value: jvb
+            - name: JVB_PORT
+              value: "30300"
+            - name: JVB_TCP_PORT
+              value: "4443"  
+            - name: JVB_AUTH_PASSWORD
+              value: 6ba13a7ae9fa26809a3705273d568c5e
+            - name: JICOFO_AUTH_PASSWORD
+              value: cb7a95bf9671bff5afffd931e566e2dd
+            - name: JVB_BREWERY_MUC
+              value: jvbbrewery
+            - name: TZ
+              value: America/Los_Angeles
+

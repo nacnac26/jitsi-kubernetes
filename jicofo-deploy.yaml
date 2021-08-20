@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: jicofo
+  name: jicofo
+  namespace: jitsi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      k8s-app: jicofo
+  template:
+    metadata:
+      labels:
+        k8s-app: jicofo
+    spec:
+      containers:
+        - name: jicofo
+          image: jitsi/jicofo:stable-5870 #5076 working one
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: XMPP_SERVER
+              value: prosody
+            - name: XMPP_DOMAIN
+              value: meet.jitsi
+            - name: XMPP_AUTH_DOMAIN
+              value: auth.meet.jitsi
+            - name: XMPP_INTERNAL_MUC_DOMAIN
+              value: internal-muc.meet.jitsi
+            - name: JICOFO_COMPONENT_SECRET
+              value: 9ea69e051020adb6524bbec8d88e670f
+            - name: JICOFO_AUTH_USER
+              value: focus
+            - name: JICOFO_AUTH_PASSWORD
+              value: cb7a95bf9671bff5afffd931e566e2dd
+            - name: TZ
+              value: America/Los_Angeles
+            - name: JVB_BREWERY_MUC
+              value: jvbbrewery
+  

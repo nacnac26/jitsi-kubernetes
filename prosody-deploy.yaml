@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: prosody
-          image: jitsi/prosody:stable-5870
+          image: jitsi/prosody:stable-6433
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 5222

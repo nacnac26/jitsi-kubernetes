@@ -22,7 +22,7 @@ spec:
           ports:
           - containerPort: 80
           - containerPort: 443
-          image: jitsi/web:stable-5870
+          image: jitsi/web:stable-6433
           imagePullPolicy: IfNotPresent
           env:
             - name: ENABLE_XMPP_WEBSOCKET # added

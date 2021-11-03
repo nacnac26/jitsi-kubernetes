@@ -1,7 +1,7 @@
 # Jitsi Meet
 
 Jitsi Meet deployment on bare-metal Kubernetes and minikube.  
-Jitsi version is stable-5870.  
+Jitsi version is stable-6433.  
 OS of master is Ubuntu 20.04 and OS of worker node is Ubuntu 18.04.  
 Kubeadm, Kubectl and Kubelet in version v1.21.1.  
 

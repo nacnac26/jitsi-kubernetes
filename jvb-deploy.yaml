@@ -23,7 +23,7 @@ spec:
           - containerPort: 30300
             protocol: UDP
           - containerPort: 4443        
-          image: jitsi/jvb:stable-5870
+          image: jitsi/jvb:stable-6433
           resources: {}
           imagePullPolicy: IfNotPresent
           env:

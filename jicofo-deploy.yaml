@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: jicofo
-          image: jitsi/jicofo:stable-5870 #5076 working one
+          image: jitsi/jicofo:stable-6433 #5076 working one
           imagePullPolicy: IfNotPresent
           env:
             - name: XMPP_SERVER
